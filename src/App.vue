@@ -1,60 +1,61 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld/>
-    </v-main>
-  </v-app>
+  <div class='entire'>
+    <h2 class='title'>レポート何文字書いた？</h2>
+    <div class="textarea">
+      <v-textarea
+        solo
+        name="input-7-4"
+        label="数えたい文字列を入力してください"
+        v-model.trim='words'
+      ></v-textarea>
+    </div>
+    <div class="result">
+      <p id='count'>文字数: {{ wordLength }}</p>
+      <v-btn elevation="2" @click='reset'>リセット</v-btn>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
 export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
+  data() {
+    return {
+      words: ''
+    }
   },
-
-  data: () => ({
-    //
-  }),
-};
+  computed: {
+    wordLength() {
+      return this.words.length
+    }
+  },
+  methods: {
+    reset() {
+      this.words = ''
+    }
+  }
+}
 </script>
+
+<style scoped>
+.entire {
+  font-family: 'Slabo 27px', serif;
+}
+
+.title {
+  text-align: center;
+  padding: 30px;
+}
+
+.textarea {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.result {
+  text-align: center;
+}
+
+#count {
+  margin: 10px;
+}
+</style>
